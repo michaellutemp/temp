@@ -8,8 +8,6 @@ RUN pip install -r requirements.txt
 RUN addgroup --system app && adduser --system --group app
 RUN apt-get update && apt-get upgrade
 
-EXPOSE 5000
-
 USER app
 
 CMD ["python", "./myapp.py"]
