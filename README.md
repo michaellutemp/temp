@@ -71,14 +71,14 @@ For this task a managed group with one node is enough. We can use LoadBalancer S
 BONUS:
 When installing EKS, I also installed metrics-server needed by HPA.
 I did not use a benchmarking tool (it is possible from outside the cluster and it is possible to run some ubuntu pod inside the myapp namespace and run load test from there). Instead I simply configured HPA to scale on low CPU consumption. As the output below shows, the scaling works.
-
+```
 kubectl get all --namespace myapp
 NAME                         READY   STATUS    RESTARTS   AGE
 pod/myapp-54f858d947-8lbjf   1/1     Running   0          4m31s
 pod/myapp-54f858d947-v5dcz   1/1     Running   0          3m
 
 NAME            TYPE           CLUSTER-IP       EXTERNAL-IP                                                                  PORT(S)          AGE
-service/myapp   LoadBalancer   172.20.112.155   ae181050e17cd4acc8316efa9fbfd4d9-1052897149.eu-central-1.elb.amazonaws.com   8080:30148/TCP   4m31s
+service/myapp   LoadBalancer   172.20.112.155   xxxxxxxxxyyyyyyyyyyyyyyyyyyzzzzzzzzzzzzzzz.eu-central-1.elb.amazonaws.com   8080:30148/TCP   4m31s
 
 NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/myapp   2/2     2            2           4m31s
@@ -88,3 +88,4 @@ replicaset.apps/myapp-54f858d947   2         2         2       4m31s
 
 NAME                                        REFERENCE          TARGETS                       MINPODS   MAXPODS   REPLICAS   AGE
 horizontalpodautoscaler.autoscaling/myapp   Deployment/myapp   cpu: 5%/5%, memory: 31%/80%   1         3         2          4m31s
+```
