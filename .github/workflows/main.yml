@@ -36,3 +36,16 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+    - name: Update kubeconfig
+      run: |
+        aws eks update-kubeconfig --name demo-cluster --region eu-central-1
+
+    - name: Check Kubernetes config
+      run: |
+        kubectl cluster-info
+
+    - name: Deploy API Gateway with Helm
+      run: |
+        helm upgrade --install --wait --namespace myapp myapp ./helm --set image.tag=$IMAGE_TAG
+        kubectl get all --namespace myapp
