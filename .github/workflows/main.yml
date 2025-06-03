@@ -46,6 +46,8 @@ jobs:
         kubectl cluster-info
 
     - name: Deploy sample app with Helm
+      env:
+        IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
       run: |
         helm upgrade --install --wait --namespace myapp --create-namespace myapp ./chart --set image.tag=$IMAGE_TAG
         kubectl get all --namespace myapp
